@@ -35,13 +35,13 @@ export const Message = ({
       initial={{ y: 5, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
     >
-      <div className="size-[24px] border rounded-sm p-1 flex flex-col justify-center items-center shrink-0 text-zinc-500">
+      <div className="size-[24px] border rounded-sm p-1 flex flex-col justify-center items-center shrink-0 text-blue-500">
         {role === "assistant" ? <BotIcon /> : <UserIcon />}
       </div>
 
       <div className="flex flex-col gap-2 w-full">
         {content && typeof content === "string" && (
-          <div className="text-zinc-800 dark:text-zinc-300 flex flex-col gap-4">
+          <div className="text-blue-900 dark:text-blue-200 flex flex-col gap-4">
             <Streamdown>{content}</Streamdown>
           </div>
         )}

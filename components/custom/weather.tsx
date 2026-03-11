@@ -256,7 +256,7 @@ export function Weather({
           "bg-blue-400": isDay,
         },
         {
-          "bg-indigo-900": !isDay,
+          "bg-blue-900": !isDay,
         },
       )}
     >
@@ -266,10 +266,10 @@ export function Weather({
             className={cx(
               "size-10 rounded-full skeleton-div",
               {
-                "bg-yellow-300": isDay,
+                "bg-blue-200": isDay,
               },
               {
-                "bg-indigo-100": !isDay,
+                "bg-blue-300": !isDay,
               },
             )}
           />
@@ -292,10 +292,10 @@ export function Weather({
               className={cx(
                 "size-6 rounded-full skeleton-div",
                 {
-                  "bg-yellow-300": isDay,
+                  "bg-blue-200": isDay,
                 },
                 {
-                  "bg-indigo-200": !isDay,
+                  "bg-blue-300": !isDay,
                 },
               )}
             />

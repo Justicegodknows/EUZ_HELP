@@ -115,9 +115,9 @@ export const History = ({ user }: { user: User | undefined }) => {
 
           <div className="text-sm flex flex-row items-center justify-between">
             <div className="flex flex-row gap-2">
-              <div className="dark:text-zinc-300">History</div>
+              <div className="dark:text-blue-200">History</div>
 
-              <div className="dark:text-zinc-400 text-zinc-500">
+              <div className="dark:text-blue-400 text-blue-500">
                 {history === undefined ? "loading" : history.length} chats
               </div>
             </div>
@@ -138,14 +138,14 @@ export const History = ({ user }: { user: User | undefined }) => {
 
             <div className="flex flex-col overflow-y-scroll p-1 h-[calc(100dvh-124px)]">
               {!user ? (
-                <div className="text-zinc-500 h-dvh w-full flex flex-row justify-center items-center text-sm gap-2">
+                <div className="text-blue-500 h-dvh w-full flex flex-row justify-center items-center text-sm gap-2">
                   <InfoIcon />
                   <div>Login to save and revisit previous chats!</div>
                 </div>
               ) : null}
 
               {!isLoading && history?.length === 0 && user ? (
-                <div className="text-zinc-500 h-dvh w-full flex flex-row justify-center items-center text-sm gap-2">
+                <div className="text-blue-500 h-dvh w-full flex flex-row justify-center items-center text-sm gap-2">
                   <InfoIcon />
                   <div>No chats found</div>
                 </div>
@@ -156,7 +156,7 @@ export const History = ({ user }: { user: User | undefined }) => {
                   {[44, 32, 28, 52].map((item) => (
                     <div key={item} className="p-2 my-[2px]">
                       <div
-                        className={`w-${item} h-[20px] rounded-md bg-zinc-200 dark:bg-zinc-600 animate-pulse`}
+                        className={`w-${item} h-[20px] rounded-md bg-blue-200 dark:bg-blue-700 animate-pulse`}
                       />
                     </div>
                   ))}
@@ -168,14 +168,14 @@ export const History = ({ user }: { user: User | undefined }) => {
                   <div
                     key={chat.id}
                     className={cx(
-                      "flex flex-row items-center gap-6 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-md pr-2",
-                      { "bg-zinc-200 dark:bg-zinc-700": chat.id === id },
+                      "flex flex-row items-center gap-6 hover:bg-blue-200 dark:hover:bg-blue-800 rounded-md pr-2",
+                      { "bg-blue-200 dark:bg-blue-800": chat.id === id },
                     )}
                   >
                     <Button
                       variant="ghost"
                       className={cx(
-                        "hover:bg-zinc-200 dark:hover:bg-zinc-700 justify-between p-0 text-sm font-normal flex flex-row items-center gap-2 pr-2 w-full transition-none",
+                        "hover:bg-blue-200 dark:hover:bg-blue-800 justify-between p-0 text-sm font-normal flex flex-row items-center gap-2 pr-2 w-full transition-none",
                       )}
                       asChild
                     >
@@ -190,7 +190,7 @@ export const History = ({ user }: { user: User | undefined }) => {
                     <DropdownMenu modal={true}>
                       <DropdownMenuTrigger asChild>
                         <Button
-                          className="p-0 h-fit font-normal text-zinc-500 transition-none hover:bg-zinc-200 dark:hover:bg-zinc-700"
+                          className="p-0 h-fit font-normal text-blue-500 transition-none hover:bg-blue-200 dark:hover:bg-blue-800"
                           variant="ghost"
                         >
                           <MoreHorizontalIcon />

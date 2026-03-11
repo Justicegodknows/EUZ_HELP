@@ -52,11 +52,11 @@ export function AuthorizePayment({
   };
 
   return reservation?.hasCompletedPayment ? (
-    <div className="bg-emerald-500 p-4 rounded-lg gap-4 flex flex-row justify-between items-center">
-      <div className="dark:text-emerald-950 text-emerald-50 font-medium">
+    <div className="bg-blue-500 p-4 rounded-lg gap-4 flex flex-row justify-between items-center">
+      <div className="dark:text-blue-950 text-blue-50 font-medium">
         Payment Verified
       </div>
-      <div className="dark:text-emerald-950 text-emerald-50">
+      <div className="dark:text-blue-950 text-blue-50">
         <CheckCircle size={20} />
       </div>
     </div>
@@ -80,7 +80,7 @@ export function AuthorizePayment({
       <Input
         type="text"
         placeholder="Enter magic word..."
-        className="dark:bg-zinc-700 text-base border-none mt-2"
+        className="dark:bg-blue-800 text-base border-none mt-2"
         onChange={(event) => setInput(event.currentTarget.value)}
         onKeyDown={async (event) => {
           if (event.key === "Enter") {

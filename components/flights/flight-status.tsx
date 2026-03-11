@@ -54,7 +54,7 @@ export function Row({ row = SAMPLE.arrival, type = "arrival" }) {
       </div>
 
       <div className="flex flex-col gap-1 items-end justify-center mt-auto">
-        <div className="text-sm sm:text-sm bg-amber-400 rounded-md w-fit px-2 text-amber-900">
+        <div className="text-sm sm:text-sm bg-blue-400 rounded-md w-fit px-2 text-blue-900">
           {row.gate}
         </div>
         <div className="text-sm text-muted-foreground">

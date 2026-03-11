@@ -103,8 +103,8 @@ export function SelectSeats({
                   className={cx(
                     "cursor-pointer group relative size-8 sm:size-10 flex-shrink-0 flex rounded-sm flex-row items-center justify-center",
                     {
-                      "bg-blue-500 hover:bg-pink-500": seat.isAvailable,
-                      "bg-gray-500 cursor-not-allowed": !seat.isAvailable,
+                      "bg-blue-500 hover:bg-blue-400": seat.isAvailable,
+                      "bg-blue-200 cursor-not-allowed": !seat.isAvailable,
                     },
                   )}
                 >
@@ -113,8 +113,8 @@ export function SelectSeats({
                     className={cx(
                       "absolute -top-1 h-2 w-full scale-125 rounded-sm",
                       {
-                        "bg-blue-600 group-hover:bg-pink-600": seat.isAvailable,
-                        "bg-zinc-600 cursor-not-allowed": !seat.isAvailable,
+                        "bg-blue-600 group-hover:bg-blue-500": seat.isAvailable,
+                        "bg-blue-300 cursor-not-allowed": !seat.isAvailable,
                       },
                     )}
                   />
@@ -133,7 +133,7 @@ export function SelectSeats({
           </div>
         </div>
         <div className="flex flex-row items-center gap-2">
-          <div className="size-4 bg-gray-500 rounded-sm" />
+          <div className="size-4 bg-blue-200 rounded-sm" />
           <div className="text text-muted-foreground font-medium text-sm">
             Unavailable
           </div>

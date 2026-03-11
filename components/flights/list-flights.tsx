@@ -91,7 +91,7 @@ export function ListFlights({
       {results.flights.map((flight) => (
         <div
           key={flight.id}
-          className="cursor-pointer flex flex-row border-b dark:border-zinc-700 py-2 last-of-type:border-none group"
+          className="cursor-pointer flex flex-row border-b dark:border-blue-800 py-2 last-of-type:border-none group"
           onClick={() => {
             append({
               role: "user",
@@ -136,7 +136,7 @@ export function ListFlights({
 
           <div className="flex flex-col w-32 items-end gap-0.5">
             <div className="flex flex-row gap-2">
-              <div className="text-base sm:text-base text-emerald-600 dark:text-emerald-500">
+              <div className="text-base sm:text-base text-blue-600 dark:text-blue-400">
                 ${flight.priceInUSD}
               </div>
             </div>

@@ -29,10 +29,10 @@ export const Navbar = async () => {
               width={20}
               alt="gemini logo"
             />
-            <div className="text-zinc-500">
+            <div className="text-blue-400">
               <SlashIcon size={16} />
             </div>
-            <div className="text-sm dark:text-zinc-300 truncate w-28 md:w-fit">
+            <div className="text-sm dark:text-blue-200 truncate w-28 md:w-fit">
               Next.js Gemini Chatbot
             </div>
           </div>

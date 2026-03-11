@@ -13,8 +13,8 @@ export const Overview = () => {
       exit={{ opacity: 0, scale: 0.98 }}
       transition={{ delay: 0.5 }}
     >
-      <div className="border-none bg-muted/50 rounded-2xl p-6 flex flex-col gap-4 text-zinc-500 text-sm dark:text-zinc-400 dark:border-zinc-700">
-        <p className="flex flex-row justify-center gap-4 items-center text-zinc-900 dark:text-zinc-50">
+      <div className="border-none bg-muted/50 rounded-2xl p-6 flex flex-col gap-4 text-blue-600 text-sm dark:text-blue-400 dark:border-blue-700">
+        <p className="flex flex-row justify-center gap-4 items-center text-blue-900 dark:text-blue-50">
           <VercelIcon />
           <span>+</span>
           <MessageIcon />

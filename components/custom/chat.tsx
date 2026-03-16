@@ -30,7 +30,7 @@ export function Chat({
   initialModelId?: ModelId;
 }) {
   const [modelId, setModelId] = useState<ModelId>(
-    initialModelId ?? "gemini-3.1-flash",
+    initialModelId ?? "gemini-3.1-flash-image",
   );
   const modelIdRef = useRef(modelId);
   modelIdRef.current = modelId;

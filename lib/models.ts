@@ -23,7 +23,7 @@ function pair<T extends object>(value: T) {
 }
 
 export const models = {
-  "gemini-3.1-flash": {
+  "gemini-3.1-flash-image": {
     label: "Gemini 3.1 Flash Image",
     model: google("gemini-3.1-flash-image-preview"),
     options: {
@@ -84,18 +84,18 @@ export const models = {
 export type ModelId = keyof typeof models;
 
 export const modelIds: ModelId[] = [
-  "gemini-3.1-flash",
+  "gemini-3.1-flash-image",
   "gemini-3-pro-image",
 ];
 
 export const labels: Record<ModelId, string> = {
-  "gemini-3.1-flash": models["gemini-3.1-flash"].label,
+  "gemini-3.1-flash-image": models["gemini-3.1-flash-image"].label,
   "gemini-3-pro": models["gemini-3-pro"].label,
   "gemini-3-pro-image": models["gemini-3-pro-image"].label,
 };
 
 export const shortLabels: Record<ModelId, string> = {
-  "gemini-3.1-flash": "3.1 Flash",
+  "gemini-3.1-flash-image": "3.1 Flash Image",
   "gemini-3-pro": "3 Pro",
   "gemini-3-pro-image": "3 Pro Image",
 };

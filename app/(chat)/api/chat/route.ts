@@ -37,7 +37,7 @@ function select(modelId: ModelId, text: string) {
     return models["gemini-3-pro-image"];
   }
 
-  return models[modelId] ?? models["gemini-3.1-flash"];
+  return models[modelId] ?? models["gemini-3.1-flash-image"];
 }
 
 export const maxDuration = 60;
@@ -57,7 +57,7 @@ export async function POST(request: Request) {
     return new Response("Request too large or malformed", { status: 413 });
   }
 
-  const { messages, chatId, modelId = "gemini-3.1-flash" } = body;
+  const { messages, chatId, modelId = "gemini-3.1-flash-image" } = body;
 
   const prompt = latest(messages);
   const selected = select(modelId, prompt);

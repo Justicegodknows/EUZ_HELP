@@ -1,0 +1,101 @@
+import { google, type GoogleLanguageModelOptions } from "@ai-sdk/google";
+import { gateway } from "ai";
+
+const order = { gateway: { order: ["google", "vertex"] } };
+const image = { responseModalities: ["TEXT", "IMAGE"] };
+const thought = {
+  thinkingConfig: { thinkingBudget: 8192, includeThoughts: true },
+};
+const output = `You are a creative image assistant. When asked to make an image:
+
+1. In your thinking, generate 3 different variations of the image. Each variation should try a different style, angle, or interpretation. Actually generate the image files in your thinking.
+2. In your thinking, briefly compare the 3 variations and pick the best one.
+3. In your visible response, generate and return only the single best image as a new final version.
+
+Always generate real images. Never output JSON, tool calls, or text descriptions instead of images.`;
+
+function pair<T extends object>(value: T) {
+  return {
+    ...order,
+    google: { ...value },
+    vertex: { ...value },
+  };
+}
+
+export const models = {
+  "gemini-3.1-flash": {
+    label: "Gemini 3.1 Flash Image",
+    model: google("gemini-3.1-flash-image-preview"),
+    options: {
+      google: {
+        responseModalities: ["TEXT", "IMAGE"],
+        thinkingConfig: {
+          thinkingLevel: "high",
+          includeThoughts: true,
+        },
+      } satisfies GoogleLanguageModelOptions,
+    },
+    textOptions: {
+      google: {
+        responseModalities: ["TEXT"],
+        thinkingConfig: {
+          thinkingLevel: "high",
+          includeThoughts: true,
+        },
+      } satisfies GoogleLanguageModelOptions,
+    },
+    system: output,
+    textSystem: "You are a helpful assistant. Respond concisely.",
+  },
+  "gemini-3-pro": {
+    label: "Gemini 3 Pro Reasoning",
+    model: gateway("google/gemini-3-pro-preview"),
+    options: pair(thought),
+    textOptions: pair(thought),
+    system:
+      "You are a helpful reasoning assistant. Do not pretend to call image tools or output fake image actions.",
+    textSystem:
+      "You are a helpful reasoning assistant. Do not pretend to call image tools or output fake image actions.",
+  },
+  "gemini-3-pro-image": {
+    label: "Gemini 3 Pro Image",
+    model: google("gemini-3-pro-image-preview"),
+    options: {
+      google: {
+        responseModalities: ["TEXT", "IMAGE"],
+        thinkingConfig: {
+          includeThoughts: true,
+        },
+      } satisfies GoogleLanguageModelOptions,
+    },
+    textOptions: {
+      google: {
+        responseModalities: ["TEXT"],
+        thinkingConfig: {
+          includeThoughts: true,
+        },
+      } satisfies GoogleLanguageModelOptions,
+    },
+    system: output,
+    textSystem: "You are a helpful assistant. Respond concisely.",
+  },
+};
+
+export type ModelId = keyof typeof models;
+
+export const modelIds: ModelId[] = [
+  "gemini-3.1-flash",
+  "gemini-3-pro-image",
+];
+
+export const labels: Record<ModelId, string> = {
+  "gemini-3.1-flash": models["gemini-3.1-flash"].label,
+  "gemini-3-pro": models["gemini-3-pro"].label,
+  "gemini-3-pro-image": models["gemini-3-pro-image"].label,
+};
+
+export const shortLabels: Record<ModelId, string> = {
+  "gemini-3.1-flash": "3.1 Flash",
+  "gemini-3-pro": "3 Pro",
+  "gemini-3-pro-image": "3 Pro Image",
+};

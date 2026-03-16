@@ -28,7 +28,7 @@ export const Navbar = async () => {
       <Link
         href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel-labs%2Fgemini-chatbot&env=GOOGLE_GENERATIVE_AI_API_KEY&envDescription=Get%20your%20Google%20AI%20API%20key&envLink=https%3A%2F%2Faistudio.google.com%2Fapp%2Fapikey"
         target="_blank"
-        className="flex items-center gap-2 rounded-full bg-foreground text-background px-3 py-1.5 text-xs font-medium hover:opacity-90 transition-opacity"
+        className="flex items-center gap-2 rounded-full border border-border bg-background text-foreground px-3 py-1.5 text-xs font-medium hover:bg-muted transition-colors"
       >
         <VercelIcon size={14} />
         <span className="hidden sm:inline">Deploy with Vercel</span>

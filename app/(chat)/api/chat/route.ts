@@ -66,21 +66,6 @@ export async function POST(request: Request) {
   const isImageRequest = image(prompt);
   console.log(`[chat] model=${modelId} image=${isImageRequest} prompt="${prompt.slice(0, 50)}"`);
 
-  const isFirstMessage = messages.length === 1;
-
-  if (isImageRequest && isFirstMessage) {
-    const last = modelMessages.findLast((m) => m.role === "user");
-    if (last) {
-      const suffix =
-        "\n\n[Generate exactly 3 draft images in your reasoning, labeled as Image 1, Image 2, and Image 3. Try a different style or angle for each. Compare them briefly, then pick the best one and return only that single final image in your visible response. After this, the user may refer to drafts by number (e.g. \"use image 2\" or \"change image 1 to X\") and you should use that specific draft as the base for edits.]";
-      if (typeof last.content === "string") {
-        last.content += suffix;
-      } else if (Array.isArray(last.content)) {
-        last.content.push({ type: "text", text: suffix });
-      }
-    }
-  }
-
   if (chatId && messages.length === 1) {
     await createChat({ id: chatId, messages, modelId });
   }

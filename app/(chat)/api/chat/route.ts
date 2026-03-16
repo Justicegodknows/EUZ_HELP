@@ -74,7 +74,7 @@ export async function POST(request: Request) {
     model: selected.model,
     system: isImageRequest ? selected.imageSystem : selected.textSystem,
     messages: modelMessages,
-    providerOptions: isImageRequest ? selected.options : selected.textOptions,
+    providerOptions: isImageRequest ? selected.imageOptions : selected.textOptions,
     includeRawChunks: true,
   });
 

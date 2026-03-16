@@ -26,7 +26,7 @@ export const models = {
   "gemini-3.1-flash-image": {
     label: "Gemini 3.1 Flash Image",
     model: google("gemini-3.1-flash-image-preview"),
-    options: {
+    imageOptions: {
       google: {
         responseModalities: ["TEXT", "IMAGE"],
         thinkingConfig: {
@@ -50,7 +50,7 @@ export const models = {
   "gemini-3-pro": {
     label: "Gemini 3 Pro Reasoning",
     model: gateway("google/gemini-3-pro-preview"),
-    options: pair(thought),
+    imageOptions: pair(thought),
     textOptions: pair(thought),
     imageSystem:
       "You are a helpful reasoning assistant. Do not pretend to call image tools or output fake image actions.",
@@ -60,7 +60,7 @@ export const models = {
   "gemini-3-pro-image": {
     label: "Gemini 3 Pro Image",
     model: google("gemini-3-pro-image-preview"),
-    options: {
+    imageOptions: {
       google: {
         responseModalities: ["TEXT", "IMAGE"],
         thinkingConfig: {

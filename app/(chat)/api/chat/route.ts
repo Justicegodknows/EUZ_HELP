@@ -87,7 +87,7 @@ export async function POST(request: Request) {
 
   const result = streamText({
     model: selected.model,
-    system: isImageRequest ? selected.system : selected.textSystem,
+    system: isImageRequest ? selected.imageSystem : selected.textSystem,
     messages: modelMessages,
     providerOptions: isImageRequest ? selected.options : selected.textOptions,
     includeRawChunks: true,

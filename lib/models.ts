@@ -6,9 +6,9 @@ const image = { responseModalities: ["TEXT", "IMAGE"] };
 const thought = {
   thinkingConfig: { thinkingBudget: 8192, includeThoughts: true },
 };
-const output = `You are a creative image assistant. When asked to make an image:
+const imageSystemInstruction = `You are a creative image assistant. When asked to create an image:
 
-1. In your thinking, generate 3 different variations of the image. Each variation should try a different style, angle, or interpretation. Actually generate the image files in your thinking.
+1. In your thinking, generate 3 different variations of the image, labeled as Image 1, Image 2, and Image 3. Each variation should try a different style, angle, or interpretation. Actually generate the image files in your thinking.
 2. In your thinking, briefly compare the 3 variations and pick the best one.
 3. In your visible response, generate and return only the single best image as a new final version.
 
@@ -44,7 +44,7 @@ export const models = {
         },
       } satisfies GoogleLanguageModelOptions,
     },
-    system: output,
+    imageSystem: imageSystemInstruction,
     textSystem: "You are a helpful assistant. Respond concisely.",
   },
   "gemini-3-pro": {
@@ -52,7 +52,7 @@ export const models = {
     model: gateway("google/gemini-3-pro-preview"),
     options: pair(thought),
     textOptions: pair(thought),
-    system:
+    imageSystem:
       "You are a helpful reasoning assistant. Do not pretend to call image tools or output fake image actions.",
     textSystem:
       "You are a helpful reasoning assistant. Do not pretend to call image tools or output fake image actions.",
@@ -76,7 +76,7 @@ export const models = {
         },
       } satisfies GoogleLanguageModelOptions,
     },
-    system: output,
+    imageSystem: imageSystemInstruction,
     textSystem: "You are a helpful assistant. Respond concisely.",
   },
 };

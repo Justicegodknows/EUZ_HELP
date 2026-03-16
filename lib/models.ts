@@ -1,4 +1,4 @@
-import { google, type GoogleLanguageModelOptions } from "@ai-sdk/google";
+import { type GoogleLanguageModelOptions } from "@ai-sdk/google";
 import { gateway } from "ai";
 
 const order = { gateway: { order: ["google", "vertex"] } };
@@ -31,7 +31,7 @@ function pair<T extends object>(value: T) {
 export const models = {
   "gemini-3.1-flash-image": {
     label: "Gemini 3.1 Flash Image",
-    model: google("gemini-3.1-flash-image-preview"),
+    model: gateway("google/gemini-3.1-flash-image-preview"),
     imageOptions: {
       google: {
         responseModalities: ["TEXT", "IMAGE"],
@@ -65,7 +65,7 @@ export const models = {
   },
   "gemini-3-pro-image": {
     label: "Gemini 3 Pro Image",
-    model: google("gemini-3-pro-image-preview"),
+    model: gateway("google/gemini-3-pro-image-preview"),
     imageOptions: {
       google: {
         responseModalities: ["TEXT", "IMAGE"],

@@ -128,7 +128,13 @@ export function Chat({
     !lastMessage.parts.some(
       (p) =>
         (p.type === "text" && p.text.trim()) ||
-        (p.type === "file" && p.mediaType?.startsWith("image/")),
+        (p.type === "file" && p.mediaType?.startsWith("image/")) ||
+        (p.type === "reasoning-file" && p.mediaType?.startsWith("image/")) ||
+        (p.type === "file" &&
+          ((p.providerMetadata?.google as { thought?: boolean } | undefined)
+            ?.thought === true ||
+            (p.providerMetadata?.vertex as { thought?: boolean } | undefined)
+              ?.thought === true)),
     );
 
   return (

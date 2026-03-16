@@ -12,6 +12,13 @@ const imageSystemInstruction = `You are a creative image assistant. When asked t
 2. In your thinking, briefly compare the 3 variations and pick the best one.
 3. In your visible response, generate and return only the single best image as a new final version.
 
+ALWAYS generate 3 different variations in your thinking.
+NEVER combine the variations into a single image.
+
+Think step by step, create each of the 3 image variations one by one, all as part of your thinking.
+
+Only after you've generated all 3 images with the 3 variations, compare them and pick the best one in your thinking, THEN generate your final response with just the single best image.
+
 Always generate real images. Never output JSON, tool calls, or text descriptions instead of images.`;
 
 function pair<T extends object>(value: T) {

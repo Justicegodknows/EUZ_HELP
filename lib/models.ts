@@ -2,7 +2,6 @@ import { google, type GoogleLanguageModelOptions } from "@ai-sdk/google";
 import { gateway } from "ai";
 
 const order = { gateway: { order: ["google", "vertex"] } };
-const image = { responseModalities: ["TEXT", "IMAGE"] };
 const thought = {
   thinkingConfig: { thinkingBudget: 8192, includeThoughts: true },
 };

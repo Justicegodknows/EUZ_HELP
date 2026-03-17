@@ -70,6 +70,7 @@ export const models = {
       google: {
         responseModalities: ["TEXT", "IMAGE"],
         thinkingConfig: {
+          thinkingBudget: 32768,
           includeThoughts: true,
         },
       } satisfies GoogleLanguageModelOptions,
@@ -78,6 +79,7 @@ export const models = {
       google: {
         responseModalities: ["TEXT"],
         thinkingConfig: {
+          thinkingBudget: 32768,
           includeThoughts: true,
         },
       } satisfies GoogleLanguageModelOptions,

@@ -253,12 +253,11 @@ function ReasoningBlock({ parts }: { parts: Part[] }) {
   const isStreaming = hasEverStreamed.current && !allDone;
 
   const [open, setOpen] = useState(rawStreaming);
-  const [highlighted, setHighlighted] = useState<number | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const textParts = parts.filter((p) => p.type === "reasoning" && "text" in p);
   const images = parts.filter(isreasoningimage);
-  const totalText = textParts
+  const totalText = parts
+    .filter((p) => p.type === "reasoning" && "text" in p)
     .map((p) => ("text" in p ? clean(p.text) : ""))
     .join("");
 
@@ -289,28 +288,6 @@ function ReasoningBlock({ parts }: { parts: Part[] }) {
     }
   }, [isStreaming, totalText]);
 
-  const scrollToImage = useCallback((index: number) => {
-    if (!scrollRef.current) return;
-    setHighlighted(index);
-    setTimeout(() => setHighlighted(null), 2000);
-
-    const markers = [`image ${index + 1}`, `variation ${index + 1}`, `draft ${index + 1}`, `option ${index + 1}`];
-    const text = scrollRef.current.textContent?.toLowerCase() ?? "";
-    let pos = -1;
-    for (const marker of markers) {
-      pos = text.indexOf(marker);
-      if (pos >= 0) break;
-    }
-
-    if (pos >= 0 && scrollRef.current) {
-      const ratio = pos / Math.max(text.length, 1);
-      scrollRef.current.scrollTo({
-        top: ratio * scrollRef.current.scrollHeight,
-        behavior: "smooth",
-      });
-    }
-  }, []);
-
   return (
     <div className="w-full">
       <button
@@ -337,53 +314,42 @@ function ReasoningBlock({ parts }: { parts: Part[] }) {
         {isStreaming ? "Reasoning..." : images.length > 1 ? `Reasoning (${images.length} drafts)` : "Reasoning"}
       </button>
       {open && (
-          <div className="animate-in fade-in duration-150">
-            <div className="border border-border rounded-xl overflow-hidden">
-              {!isStreaming && images.length > 1 && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="overflow-hidden"
-                >
-                  <div className="grid grid-cols-3 gap-1.5 p-2 bg-muted/30">
-                    {images.slice(0, 3).map((part, i) => (
-                      <motion.div
-                        key={`ri-${i}`}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.3, delay: i * 0.1 }}
-                        className={`relative cursor-pointer rounded-lg overflow-hidden ring-2 transition-all ${
-                          highlighted === i
-                            ? "ring-primary"
-                            : "ring-transparent hover:ring-primary/40"
-                        }`}
-                        onClick={() => scrollToImage(i)}
-                      >
-                        <img
-                          src={(part as { url: string }).url}
-                          alt={`Draft ${i + 1}`}
-                          loading="lazy"
-                          decoding="async"
-                          className="w-full aspect-square object-cover"
-                        />
-                        <div className="absolute top-1.5 left-1.5 size-5 rounded-full bg-black/60 text-white text-[10px] font-medium flex items-center justify-center">
-                          {i + 1}
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
+        <div className="animate-in fade-in duration-150">
+          <div className="border border-border rounded-xl overflow-hidden">
+            <div ref={scrollRef} className="max-h-[400px] overflow-y-auto reasoning-scroll p-3 text-sm text-muted-foreground leading-relaxed flex flex-col gap-3">
+              {parts.map((part, i) => {
+                if (part.type === "reasoning" && "text" in part) {
+                  const text = clean(part.text);
+                  if (!text.trim()) return null;
+                  return (
+                    <div key={`r-${i}`}>
+                      <Streamdown>{text}</Streamdown>
+                    </div>
+                  );
+                }
 
-              {totalText && (
-                <div ref={scrollRef} className="max-h-[200px] overflow-y-auto reasoning-scroll p-3 text-sm text-muted-foreground leading-relaxed">
-                  <Streamdown>{totalText}</Streamdown>
-                </div>
-              )}
+                if (isreasoningimage(part)) {
+                  return (
+                    <motion.img
+                      key={`ri-${i}`}
+                      src={(part as { url: string }).url}
+                      alt="Draft"
+                      loading="lazy"
+                      decoding="async"
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3 }}
+                      className="rounded-lg max-w-[80%]"
+                    />
+                  );
+                }
+
+                return null;
+              })}
             </div>
           </div>
-        )}
+        </div>
+      )}
     </div>
   );
 }

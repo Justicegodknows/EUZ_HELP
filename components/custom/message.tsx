@@ -219,7 +219,7 @@ export function ErrorMessage({ message }: { message: string }) {
   );
 }
 
-export function ThinkingIndicator() {
+export function ReasoningIndicator() {
   return (
     <motion.div
       className="flex w-full md:max-w-[700px] px-4 md:px-0 justify-start"
@@ -227,13 +227,13 @@ export function ThinkingIndicator() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.15 }}
     >
-      <div className="flex items-center gap-2 text-muted-foreground text-sm py-2">
+      <div className="flex items-center gap-2 text-muted-foreground text-xs py-2">
         <div className="thinking-dots flex gap-1">
           <span />
           <span />
           <span />
         </div>
-        <span>Thinking</span>
+        <span>Reasoning...</span>
       </div>
     </motion.div>
   );
@@ -311,7 +311,7 @@ function ReasoningBlock({ parts }: { parts: Part[] }) {
             <path d="M4 2l4 4-4 4" />
           </svg>
         )}
-        {isStreaming ? "Reasoning..." : images.length > 1 ? `Reasoning (${images.length} drafts)` : "Reasoning"}
+        { `Reasoning${images.length > 1 ? ` (${images.length} drafts)` : images.length > 0 ? " (1 draft)" : ""}${isStreaming ? '...' : ''}` }
       </button>
       {open && (
         <div className="animate-in fade-in duration-150">

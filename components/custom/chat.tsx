@@ -8,7 +8,7 @@ import { toast } from "sonner";
 
 import {
   Message as PreviewMessage,
-  ThinkingIndicator,
+  ReasoningIndicator,
   ErrorMessage,
 } from "./message";
 import { Lightbox } from "./lightbox";
@@ -154,7 +154,7 @@ export function Chat({
             />
           ))}
 
-          {status === "submitted" && <ThinkingIndicator />}
+          {status === "submitted" && <ReasoningIndicator />}
 
           {(error || hasEmptyResponse) && (
             <ErrorMessage

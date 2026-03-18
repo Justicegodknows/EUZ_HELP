@@ -1,10 +1,6 @@
 import { type GoogleLanguageModelOptions } from "@ai-sdk/google";
 import { gateway } from "ai";
 
-const order = { gateway: { order: ["google", "vertex"] } };
-const thought = {
-  thinkingConfig: { thinkingBudget: 8192, includeThoughts: true },
-};
 const imageSystemInstruction = `You are a creative image assistant. When asked to create an image:
 
 1. In your thinking, generate 3 different variations of the image, labeled as Image 1, Image 2, and Image 3. Each variation should try a different style, angle, or interpretation. Actually generate the image files in your thinking.
@@ -20,11 +16,29 @@ Only after you've generated all 3 images with the 3 variations, compare them and
 
 Always generate real images. Never output JSON, tool calls, or text descriptions instead of images.`;
 
-function pair<T extends object>(value: T) {
+const thinkingConfigs = {
+  level: {
+    thinkingLevel: "high",
+    includeThoughts: true,
+  },
+  budget: {
+    thinkingBudget: 8192,
+    includeThoughts: true,
+  },
+};
+
+function withThinking(googleProviderOptions: GoogleLanguageModelOptions, mode: keyof typeof thinkingConfigs = "level") {
   return {
-    ...order,
-    google: { ...value },
-    vertex: { ...value },
+    gateway: { order: ["google", "vertex"] },
+    //gateway: { only: ["vertex"] },
+    google: {
+      ...googleProviderOptions,
+      thinkingConfig: thinkingConfigs[mode],
+    },
+    vertex: {
+      ...googleProviderOptions,
+      thinkingConfig: thinkingConfigs[mode],
+    },
   };
 }
 
@@ -32,32 +46,20 @@ export const models = {
   "gemini-3.1-flash-image": {
     label: "Gemini 3.1 Flash Image",
     model: gateway("google/gemini-3.1-flash-image-preview"),
-    imageOptions: {
-      google: {
-        responseModalities: ["TEXT", "IMAGE"],
-        thinkingConfig: {
-          thinkingLevel: "high",
-          includeThoughts: true,
-        },
-      } satisfies GoogleLanguageModelOptions,
-    },
-    textOptions: {
-      google: {
-        responseModalities: ["TEXT"],
-        thinkingConfig: {
-          thinkingLevel: "high",
-          includeThoughts: true,
-        },
-      } satisfies GoogleLanguageModelOptions,
-    },
+    imageOptions: withThinking({
+      responseModalities: ["TEXT", "IMAGE"],
+    }),
+    textOptions: withThinking({
+      responseModalities: ["TEXT"],
+    }),
     imageSystem: imageSystemInstruction,
     textSystem: "You are a helpful assistant. Respond concisely.",
   },
   "gemini-3-pro": {
     label: "Gemini 3 Pro Reasoning",
     model: gateway("google/gemini-3-pro-preview"),
-    imageOptions: pair(thought),
-    textOptions: pair(thought),
+    imageOptions: withThinking({}, 'budget'),
+    textOptions: withThinking({}, 'budget'),
     imageSystem:
       "You are a helpful reasoning assistant. Do not pretend to call image tools or output fake image actions.",
     textSystem:
@@ -65,25 +67,14 @@ export const models = {
   },
   "gemini-3-pro-image": {
     label: "Gemini 3 Pro Image",
-    model: gateway("google/gemini-3-pro-image-preview"),
-    imageOptions: {
-      google: {
-        responseModalities: ["TEXT", "IMAGE"],
-        thinkingConfig: {
-          thinkingBudget: 32768,
-          includeThoughts: true,
-        },
-      } satisfies GoogleLanguageModelOptions,
-    },
-    textOptions: {
-      google: {
-        responseModalities: ["TEXT"],
-        thinkingConfig: {
-          thinkingBudget: 32768,
-          includeThoughts: true,
-        },
-      } satisfies GoogleLanguageModelOptions,
-    },
+    // Model is actually "gemini-3-pro-image-preview", but AI Gateway has it under "gemini-3-pro-image"
+    model: gateway("google/gemini-3-pro-image"),
+    imageOptions: withThinking({
+      responseModalities: ["TEXT", "IMAGE"],
+    }, 'budget'),
+    textOptions: withThinking({
+      responseModalities: ["TEXT"],
+    }, 'budget'),
     imageSystem: imageSystemInstruction,
     textSystem: "You are a helpful assistant. Respond concisely.",
   },

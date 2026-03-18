@@ -25,6 +25,7 @@ const thinkingConfigs = {
     thinkingBudget: 8192,
     includeThoughts: true,
   },
+  none: undefined,
 };
 
 function withThinking(googleProviderOptions: GoogleLanguageModelOptions, mode: keyof typeof thinkingConfigs = "level") {
@@ -34,11 +35,11 @@ function withThinking(googleProviderOptions: GoogleLanguageModelOptions, mode: k
     google: {
       ...googleProviderOptions,
       thinkingConfig: thinkingConfigs[mode],
-    },
+    } satisfies GoogleLanguageModelOptions,
     vertex: {
       ...googleProviderOptions,
       thinkingConfig: thinkingConfigs[mode],
-    },
+    } satisfies GoogleLanguageModelOptions,
   };
 }
 
@@ -78,6 +79,18 @@ export const models = {
     imageSystem: imageSystemInstruction,
     textSystem: "You are a helpful assistant. Respond concisely.",
   },
+  "gemini-2.5-flash-image": {
+    label: "Gemini 2.5 Flash Image",
+    model: gateway("google/gemini-2.5-flash-image"),
+    imageOptions: withThinking({
+      responseModalities: ["TEXT", "IMAGE"],
+    }, 'none'),
+    textOptions: withThinking({
+      responseModalities: ["TEXT"],
+    }, 'none'),
+    imageSystem: 'You are a helpful image generation assistant. Respond concisely.',
+    textSystem: "You are a helpful assistant. Respond concisely.",
+  },
 };
 
 export type ModelId = keyof typeof models;
@@ -85,16 +98,19 @@ export type ModelId = keyof typeof models;
 export const modelIds: ModelId[] = [
   "gemini-3.1-flash-image",
   "gemini-3-pro-image",
+  "gemini-2.5-flash-image",
 ];
 
 export const labels: Record<ModelId, string> = {
   "gemini-3.1-flash-image": models["gemini-3.1-flash-image"].label,
   "gemini-3-pro": models["gemini-3-pro"].label,
   "gemini-3-pro-image": models["gemini-3-pro-image"].label,
+  "gemini-2.5-flash-image": models["gemini-2.5-flash-image"].label,
 };
 
 export const shortLabels: Record<ModelId, string> = {
   "gemini-3.1-flash-image": "3.1 Flash Image",
   "gemini-3-pro": "3 Pro",
   "gemini-3-pro-image": "3 Pro Image",
+  "gemini-2.5-flash-image": "2.5 Flash Image",
 };

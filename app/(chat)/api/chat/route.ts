@@ -2,6 +2,7 @@ import {
   type UIMessage,
   convertToModelMessages,
   streamText,
+  smoothStream,
 } from "ai";
 import { checkBotId } from "botid/server";
 
@@ -76,6 +77,9 @@ export async function POST(request: Request) {
     messages: modelMessages,
     providerOptions: isImageRequest ? selected.imageOptions : selected.textOptions,
     includeRawChunks: true,
+    experimental_transform: smoothStream({
+      delayInMs: 20,
+    }),
   });
 
   return result.toUIMessageStreamResponse({

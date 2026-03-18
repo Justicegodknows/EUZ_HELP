@@ -323,7 +323,7 @@ function ReasoningBlock({ parts }: { parts: Part[] }) {
                   if (!text.trim()) return null;
                   return (
                     <div key={`r-${i}`}>
-                      <Streamdown>{text}</Streamdown>
+                      <Streamdown isAnimating={isStreaming}>{text}</Streamdown>
                     </div>
                   );
                 }

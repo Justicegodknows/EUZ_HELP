@@ -5,9 +5,10 @@ import { motion } from "framer-motion";
 import { ReactNode } from "react";
 import { Streamdown } from "streamdown";
 
+import { Attachment } from "@/lib/types";
+
 import { BotIcon, UserIcon } from "./icons";
 import { PreviewAttachment } from "./preview-attachment";
-import { Attachment } from "@/lib/types";
 import { Weather } from "./weather";
 import { AuthorizePayment } from "../flights/authorize-payment";
 import { DisplayBoardingPass } from "../flights/boarding-pass";

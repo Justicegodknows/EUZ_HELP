@@ -1,4 +1,4 @@
-import { convertToCoreMessages, Message, streamText } from "ai";
+import { convertToModelMessages, UIMessage, streamText } from "ai";
 import { checkBotId } from "botid/server";
 import { z } from "zod";
 
@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     return new Response("Access denied", { status: 403 });
   }
 
-  const { id, messages }: { id: string; messages: Array<Message> } =
+  const { id, messages }: { id: string; messages: Array<UIMessage> } =
     await request.json();
 
   const session = await auth();
@@ -34,7 +34,7 @@ export async function POST(request: Request) {
     return new Response("Unauthorized", { status: 401 });
   }
 
-  const coreMessages = convertToCoreMessages(messages).filter(
+  const coreMessages = convertToModelMessages(messages).filter(
     (message) => message.content.length > 0,
   );
 

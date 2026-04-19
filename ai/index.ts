@@ -1,14 +1,18 @@
-import { google } from "@ai-sdk/google";
-import { experimental_wrapLanguageModel as wrapLanguageModel } from "ai";
+import { createGateway } from "@ai-sdk/gateway";
+import { wrapLanguageModel } from "ai";
 
 import { customMiddleware } from "./custom-middleware";
 
+const gateway = createGateway({
+  baseURL: "https://ai-gateway.vercel.sh/v1/ai",
+});
+
 export const geminiProModel = wrapLanguageModel({
-  model: google("gemini-2.5-pro"),
+  model: gateway("google/gemini-2.5-pro"),
   middleware: customMiddleware,
 });
 
 export const geminiFlashModel = wrapLanguageModel({
-  model: google("gemini-2.5-flash"),
+  model: gateway("google/gemini-2.5-flash"),
   middleware: customMiddleware,
 });

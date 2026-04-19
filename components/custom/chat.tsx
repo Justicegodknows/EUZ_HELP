@@ -1,12 +1,12 @@
 "use client";
 
-import { UIMessage } from "ai";
 import { useChat } from "@ai-sdk/react";
-import { Attachment } from "@/lib/types";
+import { UIMessage } from "ai";
 import { useState } from "react";
 
 import { Message as PreviewMessage } from "@/components/custom/message";
 import { useScrollToBottom } from "@/components/custom/use-scroll-to-bottom";
+import { Attachment } from "@/lib/types";
 
 import { MultimodalInput } from "./multimodal-input";
 import { Overview } from "./overview";

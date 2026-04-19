@@ -8,6 +8,9 @@ dependencies:
   '@ai-sdk/google':
     specifier: ^0.0.51
     version: 0.0.51(zod@3.25.76)
+  '@ai-sdk/openai':
+    specifier: ^0.0.60
+    version: 0.0.60(zod@3.25.76)
   '@radix-ui/react-alert-dialog':
     specifier: ^1.1.2
     version: 1.1.15(@types/react-dom@19.2.3)(@types/react@19.2.7)(react-dom@19.2.1)(react@19.2.1)
@@ -38,6 +41,9 @@ dependencies:
   '@vercel/blob':
     specifier: ^0.24.1
     version: 0.24.1
+  '@vercel/functions':
+    specifier: ^3.4.3
+    version: 3.4.3
   '@vercel/kv':
     specifier: ^3.0.0
     version: 3.0.0
@@ -50,6 +56,9 @@ dependencies:
   bcrypt-ts:
     specifier: ^5.0.2
     version: 5.0.3
+  botid:
+    specifier: ^1.5.11
+    version: 1.5.11(next@15.5.7)(react@19.2.1)
   class-variance-authority:
     specifier: ^0.7.0
     version: 0.7.1
@@ -190,6 +199,33 @@ packages:
       zod: 3.25.76
     dev: false
 
+  /@ai-sdk/openai@0.0.60(zod@3.25.76):
+    resolution: {integrity: sha512-NEdDdv3o76jT6UeWHxP6I/lMYcjFQhQGQi/U2gVqW1PEU4Pjaud7tAVSy27IPbiRakg6GOzWrltI2JhZgAI1wg==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.0.0
+    dependencies:
+      '@ai-sdk/provider': 0.0.23
+      '@ai-sdk/provider-utils': 1.0.19(zod@3.25.76)
+      zod: 3.25.76
+    dev: false
+
+  /@ai-sdk/provider-utils@1.0.19(zod@3.25.76):
+    resolution: {integrity: sha512-p02Fq5Mnc8T6nwRBN1Iaou8YXvN1sDS6hbmJaD5UaRbXjizbh+8rpFS/o7jqAHTwf3uHCDitP3pnODyHdc/CDQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.0.0
+    peerDependenciesMeta:
+      zod:
+        optional: true
+    dependencies:
+      '@ai-sdk/provider': 0.0.23
+      eventsource-parser: 1.1.2
+      nanoid: 3.3.6
+      secure-json-parse: 2.7.0
+      zod: 3.25.76
+    dev: false
+
   /@ai-sdk/provider-utils@1.0.20(zod@3.25.76):
     resolution: {integrity: sha512-ngg/RGpnA00eNOWEtXHenpX1MsM2QshQh4QJFjUfwcqHpM5kTfG7je7Rc3HcEDP+OkRVv2GF+X4fC1Vfcnl8Ow==}
     engines: {node: '>=18'}
@@ -204,6 +240,13 @@ packages:
       nanoid: 3.3.6
       secure-json-parse: 2.7.0
       zod: 3.25.76
+    dev: false
+
+  /@ai-sdk/provider@0.0.23:
+    resolution: {integrity: sha512-oAc49O5+xypVrKM7EUU5P/Y4DUL4JZUWVxhejoAVOTOl3WZUEWsMbP3QZR+TrimQIsS0WR/n9UuF6U0jPdp0tQ==}
+    engines: {node: '>=18'}
+    dependencies:
+      json-schema: 0.4.0
     dev: false
 
   /@ai-sdk/provider@0.0.24:
@@ -2599,11 +2642,28 @@ packages:
       undici: 5.29.0
     dev: false
 
+  /@vercel/functions@3.4.3:
+    resolution: {integrity: sha512-kA14KIUVgAY6VXbhZ5jjY+s0883cV3cZqIU3WhrSRxuJ9KvxatMjtmzl0K23HK59oOUjYl7HaE/eYMmhmqpZzw==}
+    engines: {node: '>= 20'}
+    peerDependencies:
+      '@aws-sdk/credential-provider-web-identity': '*'
+    peerDependenciesMeta:
+      '@aws-sdk/credential-provider-web-identity':
+        optional: true
+    dependencies:
+      '@vercel/oidc': 3.2.0
+    dev: false
+
   /@vercel/kv@3.0.0:
     resolution: {integrity: sha512-pKT8fRnfyYk2MgvyB6fn6ipJPCdfZwiKDdw7vB+HL50rjboEBHDVBEcnwfkEpVSp2AjNtoaOUH7zG+bVC/rvSg==}
     engines: {node: '>=14.6'}
     dependencies:
       '@upstash/redis': 1.35.7
+    dev: false
+
+  /@vercel/oidc@3.2.0:
+    resolution: {integrity: sha512-UycprH3T6n3jH0k44NHMa7pnFHGu/N05MjojYr+Mc6I7obkoLIJujSWwin1pCvdy/eOxrI/l3uDLQsmcrOb4ug==}
+    engines: {node: '>= 20'}
     dev: false
 
   /@vercel/postgres@0.10.0:
@@ -2928,6 +2988,21 @@ packages:
   /binary-extensions@2.3.0:
     resolution: {integrity: sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==}
     engines: {node: '>=8'}
+
+  /botid@1.5.11(next@15.5.7)(react@19.2.1):
+    resolution: {integrity: sha512-KOO1A3+/vFVJk5aFoG3sNwiogKFPVR+x4aw4gQ1b2e0XoE+i5xp48/EZn+WqR07jRHeDGwHWQUOtV5WVm7xiww==}
+    peerDependencies:
+      next: '*'
+      react: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      next:
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      next: 15.5.7(react-dom@19.2.1)(react@19.2.1)
+      react: 19.2.1
+    dev: false
 
   /brace-expansion@1.1.12:
     resolution: {integrity: sha512-9T9UjW3r0UW5c1Q7GTwllptXwhvYmEzFhzMfZ9H7FQWt+uZePjZPjBP/W1ZEyZ1twGWom5/56TF4lPcqjnDHcg==}

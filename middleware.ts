@@ -4,8 +4,6 @@ import NextAuth from "next-auth";
 
 import { authConfig } from "@/app/(auth)/auth.config";
 
-import { kasadaHandler } from "./utils/kasada/kasada-server";
-
 const MAX_REQUESTS = 100;
 
 export const { auth } = NextAuth(authConfig);
@@ -28,8 +26,6 @@ export async function botProtectionMiddleware(
     if (requests > MAX_REQUESTS) {
       return new Response("Too many requests", { status: 429 });
     }
-
-    return kasadaHandler(request, event);
   }
 }
 

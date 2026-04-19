@@ -1,4 +1,5 @@
 import { convertToCoreMessages, Message, streamText } from "ai";
+import { checkBotId } from "botid/server";
 import { z } from "zod";
 
 import { geminiProModel } from "@/ai";
@@ -19,6 +20,11 @@ import {
 import { generateUUID } from "@/lib/utils";
 
 export async function POST(request: Request) {
+  const { isBot } = await checkBotId();
+  if (isBot) {
+    return new Response("Access denied", { status: 403 });
+  }
+
   const { id, messages }: { id: string; messages: Array<Message> } =
     await request.json();
 

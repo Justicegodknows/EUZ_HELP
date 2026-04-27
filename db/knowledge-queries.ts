@@ -4,9 +4,10 @@ import { eq, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 
+import { getPostgresUrl } from "@/lib/db-url";
 import { knowledgeChunk, knowledgeDocument } from "./knowledge-schema";
 
-const client = postgres(`${process.env.POSTGRES_URL!}?sslmode=require`);
+const client = postgres(getPostgresUrl());
 const db = drizzle(client);
 
 export async function upsertKnowledgeDocument({

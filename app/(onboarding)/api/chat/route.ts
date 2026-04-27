@@ -2,15 +2,15 @@ import { convertToCoreMessages, Message, streamText } from "ai";
 import { z } from "zod";
 
 import { geminiProModel } from "@/ai";
-import { buildOnboardingTools } from "@/ai/onboarding/tools";
 import { buildSystemPrompt } from "@/ai/onboarding/system-prompt";
+import { buildOnboardingTools } from "@/ai/onboarding/tools";
 import { dispatchWebhook } from "@/ai/onboarding/webhook";
 import { auth } from "@/app/(auth)/auth";
-import { saveChat } from "@/db/queries";
 import {
   getOnboardingSessionById,
   updateOnboardingSession,
 } from "@/db/onboarding-queries";
+import { saveChat } from "@/db/queries";
 import { generateUUID } from "@/lib/utils";
 
 export async function POST(request: Request) {

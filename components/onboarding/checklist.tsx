@@ -90,7 +90,7 @@ export function Checklist({ sessionId }: { sessionId: string }) {
                         <button
                             type="button"
                             onClick={() => toggleCategory(category)}
-                            className="flex items-center justify-between w-full text-left py-1 px-1 rounded hover:bg-muted/50 transition-colors"
+                            className="flex items-center justify-between w-full text-left p-1 rounded hover:bg-muted/50 transition-colors"
                         >
                             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                                 {category}

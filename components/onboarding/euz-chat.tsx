@@ -79,7 +79,7 @@ export function EuzChat({
                 {/* Messages */}
                 <div
                     ref={messagesContainerRef}
-                    className="flex flex-col gap-4 flex-1 overflow-y-auto px-4 py-4"
+                    className="flex flex-col gap-4 flex-1 overflow-y-auto p-4"
                 >
                     {messages.length === 0 && (
                         <div className="flex flex-col items-center justify-center flex-1 gap-3 text-center py-16">

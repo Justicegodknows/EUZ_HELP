@@ -14,8 +14,9 @@ import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 
 import { onboardingStep } from "../db/onboarding-schema";
+import { getPostgresUrl } from "../lib/db-url";
 
-const client = postgres(`${process.env.POSTGRES_URL!}?sslmode=require`);
+const client = postgres(getPostgresUrl());
 const db = drizzle(client);
 
 type StepDef = {

@@ -25,9 +25,10 @@ import {
     upsertKnowledgeDocument,
     insertKnowledgeChunks,
 } from "../db/knowledge-queries";
+import { getPostgresUrl } from "../lib/db-url";
 import { embedTexts, chunkText } from "../ai/onboarding/rag";
 
-const client = postgres(`${process.env.POSTGRES_URL!}?sslmode=require`);
+const client = postgres(getPostgresUrl());
 const db = drizzle(client);
 
 const KNOWLEDGE_DIR = path.resolve(process.cwd(), "knowledge");

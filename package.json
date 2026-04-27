@@ -4,16 +4,21 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
-    "build": "tsx db/migrate && next build",
+    "build": "next build",
+    "build:with-migrate": "tsx db/migrate.ts && next build",
     "start": "next start",
     "lint": "next lint",
     "seed:steps": "tsx scripts/seed-steps.ts",
     "seed:knowledge": "tsx scripts/seed-knowledge.ts",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "tsx db/migrate.ts"
+    "db:migrate": "tsx db/migrate.ts",
+    "setup:onboarding": "npm run db:migrate && npm run seed:steps && npm run seed:knowledge",
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down"
   },
   "dependencies": {
     "@ai-sdk/google": "^0.0.51",
+    "@ai-sdk/openai": "^0.0.56",
     "@radix-ui/react-alert-dialog": "^1.1.2",
     "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-dropdown-menu": "^2.1.1",

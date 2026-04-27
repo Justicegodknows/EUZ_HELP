@@ -8,9 +8,9 @@ import { generateUUID } from "@/lib/utils";
 export default async function OnboardingSessionPage({
     params,
 }: {
-    params: { sessionId: string };
+    params: Promise<{ sessionId: string }>;
 }) {
-    const { sessionId } = params;
+    const { sessionId } = await params;
 
     const session = await auth();
     if (!session?.user?.id) redirect("/login");

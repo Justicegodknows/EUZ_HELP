@@ -1,6 +1,14 @@
 import { NextAuthConfig } from "next-auth";
 
+const authSecret =
+  process.env.AUTH_SECRET ??
+  process.env.NEXTAUTH_SECRET ??
+  (process.env.NODE_ENV === "development"
+    ? "dev-only-auth-secret-change-me"
+    : undefined);
+
 export const authConfig = {
+  secret: authSecret,
   pages: {
     signIn: "/login",
     newUser: "/",

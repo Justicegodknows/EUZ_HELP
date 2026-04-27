@@ -23,7 +23,7 @@ test.describe("Smoke", () => {
     });
 
     test("onboarding chat api rejects unauthenticated user", async ({ request }) => {
-        const res = await request.post("/api/chat", {
+        const res = await request.post("/onboarding/api/chat", {
             data: {
                 id: "smoke-test-onboarding",
                 sessionId: "00000000-0000-0000-0000-000000000000",

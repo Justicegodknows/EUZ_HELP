@@ -76,6 +76,14 @@ export async function searchSimilarChunks({
 }) {
     try {
         const embeddingStr = JSON.stringify(embedding);
+        type SimilarChunkRow = {
+            id: string;
+            content: string;
+            metadata: Record<string, unknown> | null;
+            documentTitle: string;
+            department: string | null;
+            distance: number;
+        };
 
         // Use raw SQL for pgvector cosine distance operator <=>
         const rows = await db.execute(sql`
@@ -96,14 +104,17 @@ export async function searchSimilarChunks({
       LIMIT ${topK}
     `);
 
-        return rows as Array<{
-            id: string;
-            content: string;
-            metadata: Record<string, unknown> | null;
-            documentTitle: string;
-            department: string | null;
-            distance: number;
-        }>;
+        return Array.from(rows).map((row) => {
+            const r = row as Record<string, unknown>;
+            return {
+                id: String(r.id),
+                content: String(r.content),
+                metadata: (r.metadata as Record<string, unknown> | null) ?? null,
+                documentTitle: String(r.documentTitle),
+                department: (r.department as string | null) ?? null,
+                distance: Number(r.distance),
+            } satisfies SimilarChunkRow;
+        });
     } catch (error) {
         console.error("Failed to search similar chunks");
         throw error;

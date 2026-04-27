@@ -6,7 +6,11 @@
     "dev": "next dev --turbo",
     "build": "tsx db/migrate && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seed:steps": "tsx scripts/seed-steps.ts",
+    "seed:knowledge": "tsx scripts/seed-knowledge.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx db/migrate.ts"
   },
   "dependencies": {
     "@ai-sdk/google": "^0.0.51",

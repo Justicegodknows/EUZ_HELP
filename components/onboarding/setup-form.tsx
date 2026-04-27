@@ -95,6 +95,7 @@ export function SetupForm() {
                 <select
                     id="department"
                     name="department"
+                    title="Department"
                     value={department}
                     onChange={(e) => setDepartment(e.target.value)}
                     required
@@ -118,6 +119,7 @@ export function SetupForm() {
                 <select
                     id="roleLevel"
                     name="roleLevel"
+                    title="Role level"
                     value={roleLevel}
                     onChange={(e) => setRoleLevel(e.target.value)}
                     required

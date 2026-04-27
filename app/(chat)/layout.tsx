@@ -1,3 +1,4 @@
+"use client";
 import { Navbar } from "@/components/custom/navbar";
 import { usePathname } from "next/navigation";
 

@@ -12,3 +12,6 @@ export const geminiFlashModel = wrapLanguageModel({
   model: google("gemini-2.5-flash"),
   middleware: customMiddleware,
 });
+
+// Embedding model for the RAG knowledge base (768 dimensions)
+export const embeddingModel = google.textEmbeddingModel("text-embedding-004");
